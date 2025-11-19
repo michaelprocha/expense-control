@@ -1,0 +1,12 @@
+@use '../base/mixins.scss' as mix;
+
+.field{
+    max-width: 18rem;
+    width: 100%;
+    @include mix.flex($direction: column, $gap: 0.25rem);
+
+    &__input{
+        padding: 0.5rem;
+        width: 100%;
+    }
+}
