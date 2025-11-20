@@ -82,6 +82,9 @@ button {
 	font-size: var.$size;
 	font-weight: var.$weight-bolder;
 	background-color: var.$color-primary;
+	border: solid 0 var.$color-primary;
+	border-radius: 0.25rem;
+	cursor: pointer;
 }
 
 label {
@@ -95,11 +98,15 @@ input {
 	font-family: var.$family-text;
 	font-size: var.$size;
 	font-weight: var.$weight;
-    background-color: var.$color-black;
+	background-color: var.$color-black;
 	color: var.$color-white;
-    border: solid 0.15rem var.$color-white;
-    border-radius: 0.5rem;
-    outline: none;
+	border: solid 0.15rem var.$color-white;
+	border-radius: 0.5rem;
+	outline: none;
+}
+
+input:focus {
+	border-color: var.$color-primary;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -115,6 +122,12 @@ input {
 	label {
 		color: var.$color-white;
 	}
+
+	input {
+		background-color: var.$color-black;
+		color: var.$color-white;
+		border-color: var.$color-white;
+	}
 }
 
 @media (prefers-color-scheme: light) {
@@ -129,5 +142,11 @@ input {
 
 	label {
 		color: var.$color-black;
+	}
+
+	input {
+		background-color: var.$color-white;
+		color: var.$color-black;
+		border-color: var.$color-black;
 	}
 }
