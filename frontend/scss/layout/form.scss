@@ -1,0 +1,7 @@
+@use '../base/mixins.scss' as mix;
+
+.form{
+    width: 100%;
+    padding: 1rem 0;
+    @include mix.flex($direction: column, $align: center ,$gap:1rem)
+}

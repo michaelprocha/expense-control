@@ -1,0 +1,18 @@
+@use '../base/variables.scss' as var;
+@use '../base/mixins.scss' as mix;
+
+.main{
+    @include mix.flex($direction: column, $justify: center, $align: center, $gap: 1rem);
+}
+
+.title{
+    padding-bottom: 1rem;
+}
+
+.text-register{
+    color: var.$color-primary;
+}
+
+.text-forget{
+    color: var.$color-negative;
+}
