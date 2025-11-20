@@ -16,3 +16,8 @@
 .text-forget{
     color: var.$color-negative;
 }
+
+.text-w-limited{
+    max-width: 30rem;
+    text-align: center;
+}
