@@ -75,6 +75,7 @@ a {
 	font-family: var.$family-text;
 	font-size: var.$size;
 	font-weight: var.$weight;
+	color: var.$color-white;
 }
 
 button {
@@ -128,6 +129,10 @@ input:focus {
 		color: var.$color-white;
 		border-color: var.$color-white;
 	}
+
+	a {
+		color: var.$color-white;
+	}
 }
 
 @media (prefers-color-scheme: light) {
@@ -148,5 +153,9 @@ input:focus {
 		background-color: var.$color-white;
 		color: var.$color-black;
 		border-color: var.$color-black;
+	}
+
+	a {
+		color: var.$color-white;
 	}
 }
