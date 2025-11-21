@@ -4,15 +4,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass ./scss/main:./css",
-    "sass:watch": "sass --watch ./scss/main:./css",
-    "build": "sass ./scss/main:./css --style=compressed"
+    "tailwind": "npx @tailwindcss/cli -i ./src/tailwind/input.css -o ./dist/css/index.css",
+    "tailwind-w": "npx @tailwindcss/cli -i ./src/tailwind/input.css -o ./dist/css/index.css --watch"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "description": "",
   "devDependencies": {
-    "sass": "^1.94.1"
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
   }
 }

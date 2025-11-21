@@ -1,6 +1,0 @@
-@use '../base/mixins.scss' as mix;
-
-.footer{
-    padding: 1rem 0;
-    @include mix.flex($justify: center, $align: center);
-}
