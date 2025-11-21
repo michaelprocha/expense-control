@@ -5,6 +5,8 @@
 @use '../components/field.scss';
 @use '../components/button.scss';
 
-@use '../layout/main.scss';
 @use '../layout/form.scss';
 @use '../layout/footer.scss';
+
+@use '../pages/index.scss';
+@use '../pages/forgot.scss';
