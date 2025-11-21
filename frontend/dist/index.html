@@ -10,25 +10,25 @@
         <link rel="stylesheet" href="./css/index.css">
 	</head>
 	<body>
-        <main class="main">
-            <h1 class="title">InfoMoney</h1>
-            <h3 class="sub-title">Login</h3>
-            <p class="text">Não tem conta? <a class="text-register" href="./register.html">Cadastrar</a></p>
-            <form class="form">
-                <div class="field">
-                    <label class="field__label" for="email">Endereço de email</label>
-                    <input class="field__input" name="email" id="email" type="email">
+        <main class="flex flex-col items-center justify-center flex-1">
+            <h1 class="pb-4">InfoMoney</h1>
+            <h3 class="pb-2">Login</h3>
+            <p class="text-center py-2 pb-4">Não tem conta? <a class="text-primary font-medium" href="./register.html">Cadastrar</a></p>
+            <form class="flex flex-col gap-3 w-full max-w-2xs">
+                <div class="flex flex-col">
+                    <label for="email">Endereço de email</label>
+                    <input class="p-1.5" name="email" id="email" type="email">
                 </div>
-                <div class="field">
-                    <label class="field__label" for="password">Senha</label>
-                    <input class="field__input" id="password" name="password" type="password">
+                <div class="flex flex-col">
+                    <label for="password">Senha</label>
+                    <input class="p-1.5" id="password" name="password" type="password">
                 </div>
-                <button class="button-form" type="button">Logar</button>
+                <button class="py-2 mt-2.5" type="button">Logar</button>
             </form>
-            <a class="text-forget" href="./forgot.html">Esqueceu sua senha?</a>
+            <a class="pt-2 text-negative font-medium" href="./forgot.html">Esqueceu sua senha?</a>
         </main>
-        <footer class="footer">
-            <a class="footer-text">Desenvolvido por Michael Rocha</a>
+        <footer class="flex justify-center py-6">
+            <a>Desenvolvido por Michael Rocha</a>
         </footer>
     </body>
 </html>

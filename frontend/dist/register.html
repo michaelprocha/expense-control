@@ -13,28 +13,31 @@
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
-		<main class="main">
-            <h1>InfoMoney</h1>
-			<form class="form">
-				<div class="field">
-                    <label for="first_name" class="field__label">Primeiro Nome</label>
-                    <input class="field__input" type="text" name="firstName" id="first_name">
-                </div>
-				<div class="field">
-                    <label for="last_name" class="field__label">Sobrenome</label>
-                    <input class="field__input" type="text" name="lastName" id="last_name">
-                </div>
-				<div class="field">
-                    <label for="email" class="field__label">Email</label>
-                    <input class="field__input" type="email" name="email" id="email">
-                </div>
-				<div class="field">
-                    <label for="password" class="field__label">Senha</label>
-                    <input class="field__input" type="password" name="password" id="password">
-                </div>
-                <button class="button-form" type="button">Cadastrar</button>
+		<main class="flex flex-col items-center justify-center flex-1">
+			<h1 class="pb-4">InfoMoney</h1>
+			<form class="flex flex-col gap-3 w-full max-w-2xs">
+				<div class="flex flex-col">
+					<label for="first_name">Primeiro Nome</label>
+					<input class="p-1.5" type="text" name="firstName" id="first_name" />
+				</div>
+				<div class="flex flex-col">
+					<label for="last_name">Sobrenome</label>
+					<input class="p-1.5" type="text" name="lastName" id="last_name" />
+				</div>
+				<div class="flex flex-col">
+					<label for="email">Email</label>
+					<input class="p-1.5" type="email" name="email" id="email" />
+				</div>
+				<div class="flex flex-col">
+					<label for="password">Senha</label>
+					<input class="p-1.5" type="password" name="password" id="password" />
+				</div>
+				<button class="py-2 mt-2.5" type="button">Cadastrar</button>
 			</form>
-            <a class="link-goback" href="./index.html">Voltar</a>
+			<a class="text-primary font-medium pt-2" href="./index.html">Voltar</a>
 		</main>
+		<footer class="flex justify-center py-6">
+			<a>Desenvolvido por Michael Rocha</a>
+		</footer>
 	</body>
 </html>

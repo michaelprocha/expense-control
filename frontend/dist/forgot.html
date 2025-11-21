@@ -13,17 +13,22 @@
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
-        <main class="main">
-            <h3 class="subtitle">Esqueci minha senha</h3>
-            <p class="text">Para recuperar a senha, informe o email cadastrado e lhe enviaremos um email com as instruções para recuperação.</p>
-            <form class="form" action="">
-				<div class="field">
-					<label class="field__label" for="email">Email</label>
-					<input class="field__input" name="email" type="email" name="email" id="email">
+		<main class="flex flex-col items-center justify-center flex-1">
+			<h3 class="pb-2">Esqueci minha senha!</h3>
+			<p class="pb-4 max-w-92 text-center">
+				Para recuperar a senha, informe o email cadastrado e lhe enviaremos um email com as instruções para recuperação.
+			</p>
+			<form class="flex flex-col gap-3 w-full max-w-2xs">
+				<div class="flex flex-col">
+					<label for="email">Email</label>
+					<input class="p-1.5" name="email" type="email" name="email" id="email" />
 				</div>
-                <button class="button-form" type="button">Próximo</button>
-            </form>
-            <a href="./index.html">Cancelar</a>
-        </main>
-    </body>
+				<button class="py-2 mt-2.5" type="button">Próximo</button>
+			</form>
+			<a class="text-negative pt-2 font-medium" href="./index.html">Cancelar</a>
+		</main>
+		<footer class="flex justify-center py-6">
+			<a>Desenvolvido por Michael Rocha</a>
+		</footer>
+	</body>
 </html>

@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-    /* font-family */
+	/* font-family */
 	--font-rubik: "Rubik", sans-serif;
 	--font-montserrat: "Montserrat", sans-serif;
 
-
-    /* font-size */
+	/* font-size */
 	--text-5xl: 2.986rem;
 	--text-4xl: 2.488rem;
 	--text-3xl: 2.074rem;
@@ -17,8 +16,7 @@
 	--text-sm: 0.833rem;
 	--text-xsm: 0.694rem;
 
-
-    /* color */
+	/* color */
 	--color-primary: #0077b6;
 	--color-secondary: #2ecc71;
 	--color-alert: #ffb400;
@@ -29,29 +27,28 @@
 }
 
 @layer base {
-    body{
-        @apply min-w-dvw min-h-dvh bg-white text-black flex flex-col dark:bg-black dark:text-white;
-    }
+	body {
+		@apply min-w-dvw min-h-dvh bg-white text-black flex flex-col dark:bg-black dark:text-white;
+	}
 
+	header {
+		@apply min-w-dvw;
+	}
 
-header {
-	@apply min-w-dvw;
-}
+	main {
+		@apply min-w-dvw;
+	}
 
-main {
-    @apply min-w-dvw;
-}
-
-footer {
-    @apply min-w-dvw mt-auto;
-} 
+	footer {
+		@apply min-w-dvw mt-auto;
+	}
 
 	h1,
 	h2,
 	h3,
 	h4,
 	h5,
-    h6 {
+	h6 {
 		@apply font-rubik font-normal text-black dark:text-white;
 	}
 
@@ -81,26 +78,28 @@ footer {
 
 	p,
 	a,
-    button,
-    label,
-    input {
+	label,
+	input {
 		@apply font-montserrat text-m font-normal text-black dark:text-white;
 	}
 
-    button{
-        @apply uppercase bg-primary rounded-lg cursor-pointer;
-    }
+	a,
+	button {
+		@apply cursor-pointer;
+	}
 
-    input {
-        @apply border-solid border border-black bg-white rounded-lg dark:border-white dark:bg-black;
-    }
+	button {
+		@apply font-montserrat text-m uppercase bg-primary rounded-lg font-bold text-white dark:text-black;
+	}
 
-    input:focus{
-        @apply border-primary;
-    }
+	input {
+		@apply border-solid border border-black bg-white rounded-lg dark:border-white dark:bg-black;
+	}
 
+	input:focus {
+		@apply border-primary;
+	}
 }
 
 @layer components {
-
 }
