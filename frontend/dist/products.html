@@ -6,38 +6,47 @@
 		<title>infomoney</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="./css/index.css">
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
-        <header class="flex justify-between items-center py-4 px-8">
-            <h1 class="text-3xl">InfoMoney</h1>
-            <nav>
-                <a href="">Perfil</a>
-                <a href="">Sair</a>
-            </nav>
-        </header>
-        <main class="flex flex-col items-center">
-            <h2 class="text-2xl text-center pt-12 pb-6">Produtos</h2>
-            <form class="flex flex-col gap-3 w-full px-8">
-                <h3 class="text-xl">Adicionar compra</h3>
-                <div class="flex flex-col">
-                    <label for="product">Nome do produto</label>
-                    <input class="p-1.5 max-w-md" name="productName" id="product" type="text">
-                </div>
-                <div class="flex flex-col">
-                    <label for="value">Nome do produto</label>
-                    <input class="p-1.5 max-w-md" name="productValue" id="value" type="number">
-                </div>
-                <div class="flex flex-col">
-                    <label for="date">Nome do produto</label>
-                    <input class="p-1.5 max-w-md" name="productDate" id="date" type="date">
-                </div>
-                <button class="py-2 mt-2.5 max-w-md">Adicionar</button>
-            </form>
-        </main>
-        <footer class="flex justify-center py-6">
-            <a>Desenvolvido por Michael Rocha</a>
-        </footer>
-    </body>
+		<header class="flex justify-between items-center py-4 px-8">
+			<h1 class="text-3xl">InfoMoney</h1>
+			<nav>
+				<a href="">Perfil</a>
+				<a href="">Sair</a>
+			</nav>
+		</header>
+		<main class="flex flex-col items-center">
+			<h2 class="text-2xl text-center pt-12 pb-6">Produtos</h2>
+			<form class="flex flex-col gap-3 w-full px-8">
+				<h3 class="text-xl">Adicionar compra</h3>
+				<div class="flex flex-col">
+					<label for="product">Nome do produto</label>
+					<input class="p-1.5 max-w-md" name="productName" id="product" type="text" />
+				</div>
+				<div class="flex flex-col">
+					<label for="value">Nome do produto</label>
+					<input class="p-1.5 max-w-md" name="productValue" id="value" type="number" />
+				</div>
+				<div class="flex flex-col">
+					<label for="date">Nome do produto</label>
+					<input class="p-1.5 max-w-md" name="productDate" id="date" type="date" />
+				</div>
+				<button class="py-2 mt-2.5 max-w-md">Adicionar</button>
+			</form>
+		</main>
+		<footer class="flex justify-center py-6">
+			<a>Desenvolvido por Michael Rocha</a>
+		</footer>
+		<script>
+			const token = localStorage.getItem("token");
+			if (!token) {
+				window.location.href = "/frontend/dist/index.html";
+			}
+		</script>
+	</body>
 </html>
