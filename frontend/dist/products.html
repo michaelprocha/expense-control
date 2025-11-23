@@ -43,10 +43,19 @@
 			<a>Desenvolvido por Michael Rocha</a>
 		</footer>
 		<script>
-			const token = localStorage.getItem("token");
-			if (!token) {
-				window.location.href = "/frontend/dist/index.html";
+			async function verifyLogin() {
+				const login = await fetch("http://localhost:3000/login/verify", {
+					method: "GET",
+					credentials: "include",
+				});
+
+				if (login.status === 401) {
+					window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+					return;
+				}
 			}
+
+			verifyLogin();
 		</script>
 	</body>
 </html>
