@@ -9,11 +9,13 @@ export default function login(req, res) {
 	});
 	req.on("end", () => {
 		const data = JSON.parse(body);
-		console.log(data);
 		const query = "SELECT user_id, email, access FROM usuarios WHERE email = ?";
 		db.query(query, data.email, async (e, result) => {
 			if (e) {
-				console.log(`Erro na consulta: ${e.message}`);
+				res.statusCode = 500;
+				res.statusMessage = 'Erro interno do servidor';
+				res.setHeader("Content-type", "application/json; charset=utf-8");
+				res.end({ message: "Erro servidor" });
 				return;
 			}
 			if (result[0]) {
@@ -26,13 +28,14 @@ export default function login(req, res) {
 					return;
 				}
 
-				const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "1h" });
+				const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "2m" });
 
 				res.statusCode = 200;
 				res.statusMessage = `login`;
 				res.setHeader("Content-type", "application/json; charset=utf-8");
-				res.setHeader("Set-Cookie", `token=${token}; HttpOnly; SameSite=None; Path=/`);
+				res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; SameSite=None; Path=/`);
 				res.end(JSON.stringify({ redirect: "products.html" }));
+				return;
 			} else {
 				res.statusCode = 401;
 				res.statusMessage = `Erro ao logar`;

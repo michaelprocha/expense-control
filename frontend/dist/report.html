@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>infomoney</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
+	<body>
+		<header class="flex justify-between items-center py-4 px-8">
+			<h1 class="text-3xl">InfoMoney</h1>
+			<nav>
+				<a href="">Perfil</a>
+				<a href="">Sair</a>
+			</nav>
+		</header>
+		<main class="flex flex-col items-center pt-22 pb-16">
+			<form class="pb-16 px-5 w-full flex flex-col gap-3 max-w-2xs">
+				<div class="flex flex-col">
+					<label for="saved-value">Valor Guardado (R$)</label>
+					<input class="p-1.5 max-w-md" name="savedValue" id="saved-value" type="number" />
+				</div>
+				<div class="flex flex-col">
+					<label for="spending-target">Meta de Gasto (R$)</label>
+					<input class="p-1.5 max-w-md" name="spendingTarget" id="spending-target" type="number" />
+				</div>
+				<button class="py-2 mt-2.5" type="submit">Salvar dados</button>
+			</form>
+			<section class="flex flex-col w-full px-8 pb-22">
+				<h3 class="text-xl">Relatorio de gastos</h3>
+				<ul class="py-4 flex flex-col gap-6">
+					<li class="p-4 bg-positive rounded-2xl flex flex-col">
+						<p>Valor guardado</p>
+                        <p>R$ 1000,00</p>
+					</li>
+					<li class="p-4 bg-negative rounded-2xl flex flex-col">
+						<p>Valor gasto</p>
+                        <p>R$ 1000,00</p>
+					</li>
+					<li class="p-4 bg-alert rounded-2xl flex flex-col">
+						<p>Valor restante</p>
+                        <p>R$ 1000,00</p>
+					</li>
+					<li class="p-4 bg-primary rounded-2xl flex flex-col">
+						<p>Meta vs Gasto</p>
+                        <p>R$ 1000,00</p>
+					</li>
+				</ul>
+			</section>
+		</main>
+		<footer class="flex justify-center py-6">
+			<a>Desenvolvido por Michael Rocha</a>
+		</footer>
+		<script src="./javascript/index.js"></script>
+	</body>
+</html>

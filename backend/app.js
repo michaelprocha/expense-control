@@ -1,6 +1,7 @@
 import http from "http";
 import { URL } from "url";
 import login from "./javascript/login.js";
+import verifyLogin from "./javascript/verify.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +20,8 @@ const server = http.createServer((req, res) => {
 	if (urlReq.pathname === "/login" && req.method === "POST") {
 		login(req, res);
 		return;
+	}else if(urlReq.pathname === '/login/verify' && req.method === 'GET'){
+		verifyLogin(req, res);
 	}
 });
 
