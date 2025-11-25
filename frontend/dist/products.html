@@ -39,7 +39,7 @@
 			</form>
 			<section class="flex flex-col px-8 pb-22">
 				<h3 class="text-xl">Produtos comprados</h3>
-				<ul class="py-4 flex flex-col gap-6">
+				<ul id="products-list" class="py-4 flex flex-col gap-6">
 					<li class="p-4 bg-primary rounded-2xl flex flex-col justify-between">
 						<div class="flex flex-col items-center gap-2">
 							<h4 class="text-l">Arroz</h4>
@@ -59,23 +59,6 @@
 		<footer class="flex justify-center py-6">
 			<a>Desenvolvido por Michael Rocha</a>
 		</footer>
-		<script>
-			// async function verifyLogin() {
-			// 	const login = await fetch("http://localhost:3000/login/verify", {
-			// 		method: "GET",
-			// 		credentials: "include",
-			// 	});
-
-			// 	if (login.status === 401) {
-			// 		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
-			// 		return;
-			// 	}
-
-			// 	const decoded = await login.json();
-			// 	console.log(decoded);
-			// }
-
-			// verifyLogin();
-		</script>
+		<script type="module" src="./javascript/products.js"></script>
 	</body>
 </html>

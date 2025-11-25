@@ -23,12 +23,38 @@
 					<label for="email">Email</label>
 					<input class="p-1.5" name="email" type="email" name="email" id="email" />
 				</div>
-				<button class="py-2 mt-2.5" type="button">Próximo</button>
+				<button class="py-2 mt-2.5" type="submit">Próximo</button>
 			</form>
 			<a class="text-negative pt-2 font-medium" href="./index.html">Cancelar</a>
 		</main>
 		<footer class="flex justify-center py-6">
 			<a>Desenvolvido por Michael Rocha</a>
 		</footer>
+		<script>
+			const form = document.querySelector("form");
+			const email = document.querySelector("#email");
+
+			console.log(form);
+
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				const emailValue = email.value;
+				console.log('foi')
+				try {
+					const response = await fetch("http://localhost:3000/login/forgot", {
+						method: "POST",
+						credentials: "include",
+						headers: { "Content-type": "application/json" },
+						body: JSON.stringify({email: emailValue}),
+					});
+
+					const data = await response.json();
+					console.log(data);
+
+				} catch (err) {
+					console.log("ERRO DE REDE:", err.message);
+				}
+			});
+		</script>
 	</body>
 </html>

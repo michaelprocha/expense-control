@@ -1,7 +1,9 @@
 import http from "http";
 import { URL } from "url";
 import login from "./javascript/login.js";
-import verifyLogin from "./javascript/verify.js";
+import products from "./javascript/products.js";
+import validToken from "./javascript/verify.js";
+import forgotAccess from "./javascript/forgot.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,11 +19,30 @@ const server = http.createServer((req, res) => {
 	}
 
 	const urlReq = new URL(req.url, "http://localhost:3000");
-	if (urlReq.pathname === "/login" && req.method === "POST") {
-		login(req, res);
-		return;
-	}else if(urlReq.pathname === '/login/verify' && req.method === 'GET'){
-		verifyLogin(req, res);
+
+	if (req.method === "POST") {
+		if (urlReq.pathname === "/login") {
+			login(req, res);
+			return;
+		}else if(urlReq.pathname === "/login/forgot"){
+			forgotAccess(req, res);
+			return;
+		}
+	} else if (req.method === "PATCH" || req.method === "PUT") {
+	} else if (req.method === "DELTE") {
+	} else {
+		const decoded = validToken(req, res);
+		if (decoded.valid === false) {
+			return;
+		}
+		if (urlReq.pathname === "/login/verify") {
+			res.writeHead(200, { "Content-Type": "application/json" });
+			res.end(JSON.stringify({valid: true, message: "access allowed"}));
+			return;
+		} else if (urlReq.pathname === "/login/products") {
+			products(decoded, req, res);
+			return;
+		}
 	}
 });
 

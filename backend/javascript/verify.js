@@ -1,28 +1,49 @@
 import jwt from "jsonwebtoken";
 
-export default function verifyLogin(req, res) {
+function verifyLogin(req) {
 	const cookie = req.headers.cookie;
 	if (!cookie) {
-		res.writeHead(401, { "Content-Type": "application/json" });
-		return res.end(JSON.stringify({ message: "Login não permitido" }));
+		return { valid: false, message: "not allowed" };
 	}
 
 	const token = cookie
 		.split("; ")
-		.find(c => c.startsWith("token="))
+		.find((c) => c.startsWith("token="))
 		?.split("=")[1];
 
 	if (!token) {
-		res.writeHead(401, { "Content-Type": "application/json" });
-		return res.end(JSON.stringify({ message: "Token ausente" }));
+		return { valid: false, message: "token missing" };
 	}
 
 	try {
 		const decoded = jwt.verify(token, "token");
-		res.writeHead(200, { "Content-Type": "application/json" });
-		return res.end(JSON.stringify({ valid: true, user: decoded }));
-	} catch (e) {
-		res.writeHead(401, { "Content-Type": "application/json" });
-		return res.end(JSON.stringify({ message: "Token inválido ou expirado" }));
+		return decoded;
+	} catch (err) {
+		if (err.name === "TokenExpiredError") {
+			return { valid: false, message: "expired token" };
+		}
+
+		if (err.name === "JsonWebTokenError") {
+			return { valid: false, message: "invalid token" };
+		}
+
+		return { valid: false, message: "unknown error" };
 	}
+}
+
+
+export default function validToken(req, res) {
+	const decoded = verifyLogin(req)
+	if (decoded.valid === false) {
+		if (decoded.message === "unknown error") {
+			res.writeHead(500, { "Content-Type": "application/json" });
+			res.end(JSON.stringify(decoded));
+			return {valid: false};
+		} else {
+			res.writeHead(401, { "Content-Type": "application/json" });
+			res.end(JSON.stringify(decoded));
+			return {valid: false};
+		}
+	} 
+	return decoded;
 }
