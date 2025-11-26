@@ -1,6 +1,7 @@
 import http from "http";
 import { URL } from "url";
 import login from "./javascript/login.js";
+import logout from "./javascript/logout.js";
 import products from "./javascript/products.js";
 import validToken from "./javascript/verify.js";
 import register from "./javascript/register.js";
@@ -32,6 +33,9 @@ const server = http.createServer((req, res) => {
 		}else if(urlReq.pathname === '/register'){
 			register(req, res);
 			return;
+		}else if (urlReq.pathname === "/logout") {
+			logout(res);
+			return;
 		}
 	} else if (req.method === "PATCH" || req.method === "PUT") {
 		passwordReset(req, res);
@@ -49,7 +53,7 @@ const server = http.createServer((req, res) => {
 		} else if (urlReq.pathname === "/login/products") {
 			products(decoded, req, res);
 			return;
-		}
+		} 
 	}
 });
 
