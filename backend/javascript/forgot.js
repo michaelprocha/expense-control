@@ -24,7 +24,7 @@ export default function forgotAccess(req, res) {
             
 			const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "10m" });
             
-			const link = `http://localhost:3000/reset-password?token=${token}`;
+			const link = `http://127.0.0.1:5500/frontend/dist/reset.html?token=${token}`;
             
 			await transporter.sendMail({
                 from: `InfoMoney <${process.env.SMTP_USER}>`,

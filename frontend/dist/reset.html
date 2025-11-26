@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>infomoney</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
+	<body>
+		<main class="flex flex-col items-center justify-center flex-1">
+			<h3 class="pb-2 text-2xl">Redefinir senha!</h3>
+			<p class="pb-4 px-2 max-w-92 text-center">Digite a nova senha e confirme.</p>
+			<form class="flex flex-col gap-3 w-full max-w-2xs">
+				<div class="flex flex-col">
+					<label for="password">Nova senha</label>
+					<input class="p-1.5" name="password" type="password" name="password" id="password" />
+				</div>
+				<div class="flex flex-col">
+					<label for="password-confirm">Confirmar senha</label>
+					<input class="p-1.5" name="password-confirm" type="password" name="passwordConfirm" id="password-confirm" />
+				</div>
+				<button class="py-2 mt-2.5" type="submit">Confirmar</button>
+			</form>
+		</main>
+		<footer class="flex justify-center py-6">
+			<a>Desenvolvido por Michael Rocha</a>
+		</footer>
+		<script>
+            const params = new URLSearchParams(window.location.search);
+			const token = params.get("token");
+			console.log(`Token da URL: ${token}`);
+            history.replaceState({}, "", "reset.html");
+
+            const form = document.querySelector('form');
+            const password = document.querySelector('#password');
+            const passwordConfirm = document.querySelector('#password-confirm');
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const passwordValue = password.value;
+                const passwordConfirmValue = passwordConfirm.value;
+                try {
+                    const response = await fetch("http://localhost:3000/login/forgot", {
+                        method: 'PATCH',
+                        credentials: "include",
+                        body: JSON.stringify({password: passwordValue, token: token})
+                    });
+
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(`erro: ${error.message}`);
+                }
+
+            });
+		</script>
+	</body>
+</html>
