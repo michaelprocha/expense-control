@@ -6,7 +6,11 @@ import products from "./javascript/products.js";
 import validToken from "./javascript/verify.js";
 import register from "./javascript/register.js";
 import forgotAccess from "./javascript/forgot.js";
+import getIncome from "./javascript/getIncome.js";
+import editIncome from "./javascript/editIncome.js";
+import addProduct from "./javascript/addProduct.js";
 import passwordReset from "./javascript/password.js";
+import removeProduct from "./javascript/removeProduct.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,20 +31,46 @@ const server = http.createServer((req, res) => {
 		if (urlReq.pathname === "/login") {
 			login(req, res);
 			return;
-		}else if(urlReq.pathname === "/login/forgot"){
+		} else if (urlReq.pathname === "/login/forgot") {
 			forgotAccess(req, res);
 			return;
-		}else if(urlReq.pathname === '/register'){
+		} else if (urlReq.pathname === "/register") {
 			register(req, res);
 			return;
-		}else if (urlReq.pathname === "/logout") {
+		} else if (urlReq.pathname === "/logout") {
 			logout(res);
+			return;
+		} else if (urlReq.pathname === "/add-product") {
+			const decoded = validToken(req, res);
+			if (decoded.valid === false) {
+				return;
+			}
+			addProduct(decoded, req, res);
 			return;
 		}
 	} else if (req.method === "PATCH" || req.method === "PUT") {
-		passwordReset(req, res);
-		return;
+		if (urlReq.pathname === "/login/forgot") {
+			const decoded = validToken(req, res);
+			if (decoded.valid === false) {
+				return;
+			}
+			passwordReset(req, res);
+			return;
+		} else if (urlReq.pathname === "/editIncome") {
+			const decoded = validToken(req, res);
+			if (decoded.valid === false) {
+				return;
+			}
+			editIncome(decoded, req, res);
+			return;
+		}
 	} else if (req.method === "DELTE") {
+		const decoded = validToken(req, res);
+		if (decoded.valid === false) {
+			return;
+		}
+		removeProduct(decoded, req, res);
+		return;
 	} else {
 		const decoded = validToken(req, res);
 		if (decoded.valid === false) {
@@ -48,12 +78,15 @@ const server = http.createServer((req, res) => {
 		}
 		if (urlReq.pathname === "/login/verify") {
 			res.writeHead(200, { "Content-Type": "application/json" });
-			res.end(JSON.stringify({valid: true, message: "access allowed"}));
+			res.end(JSON.stringify({ valid: true, message: "access allowed" }));
 			return;
 		} else if (urlReq.pathname === "/login/products") {
-			products(decoded, req, res);
+			products(decoded, res);
 			return;
-		} 
+		} else if (urlReq.pathname === "getIncome") {
+			getIncome(decoded, res);
+			return;
+		}
 	}
 });
 

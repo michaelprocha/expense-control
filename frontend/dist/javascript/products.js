@@ -31,8 +31,7 @@ function renderProducts(products) {
 									<p>${dateFormated}</p>
 								</div>
 							</div>
-							<div class="w-full flex justify-between">
-								<a id="edit">EDITAR</a>
+							<div class="flex">
 								<a id="remove">EXCLUIR</a>
 							</div>
 						</li>`;
