@@ -11,14 +11,14 @@ export default function forgotAccess(req, res) {
 		db.query(query, data.email, async (err, result) => {
             if (err) {
                 res.writeHead(500, { "Content-type": "application/json" });
-				res.end(JSON.stringify({ message: "unknown error" }));
+				res.end(JSON.stringify({ message: "Falha inesperada" }));
 				return;
 			}
             
             res.writeHead(200, { "Content-type": "application/json" });
 
 			if (!result[0]) {
-                res.end(JSON.stringify({ message: "email sentxxx." }));
+                res.end(JSON.stringify({ message: "Enviado" }));
 				return;
 			}
             
@@ -33,7 +33,7 @@ export default function forgotAccess(req, res) {
 				html: `<p>Para resetar sua senha clique aqui:</p><a href="${link}">Recuperar senha</a>`,
 			});
             
-            res.end(JSON.stringify({ message: "email sent." }));
+            res.end(JSON.stringify({ message: "Enviado" }));
             return;
 		});
 	});

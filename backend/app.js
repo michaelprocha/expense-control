@@ -2,10 +2,10 @@ import http from "http";
 import { URL } from "url";
 import login from "./login/login.js";
 import register from "./login/register.js";
+import forgotAccess from "./login/forgotPassword.js";
 import logout from "./javascript/logout.js";
 import products from "./javascript/products.js";
 import validToken from "./javascript/verify.js";
-import forgotAccess from "./javascript/forgot.js";
 import getIncome from "./javascript/getIncome.js";
 import editIncome from "./javascript/editIncome.js";
 import addProduct from "./javascript/addProduct.js";
@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
 		if (urlReq.pathname === "/login") {
 			login(req, res);
 			return;
-		} else if (urlReq.pathname === "/login/forgot") {
+		} else if (urlReq.pathname === "/forgotPassword") {
 			forgotAccess(req, res);
 			return;
 		} else if (urlReq.pathname === "/register") {
