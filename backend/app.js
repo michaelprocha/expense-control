@@ -1,10 +1,10 @@
 import http from "http";
 import { URL } from "url";
 import login from "./login/login.js";
+import register from "./login/register.js";
 import logout from "./javascript/logout.js";
 import products from "./javascript/products.js";
 import validToken from "./javascript/verify.js";
-import register from "./javascript/register.js";
 import forgotAccess from "./javascript/forgot.js";
 import getIncome from "./javascript/getIncome.js";
 import editIncome from "./javascript/editIncome.js";

@@ -32,12 +32,17 @@
 					<label for="password">Senha</label>
 					<input class="p-1.5" type="password" name="password" id="password" />
 				</div>
-				<button class="py-2 mt-2.5" type="button">Cadastrar</button>
+				<button class="py-2 mt-2.5" type="submit">Cadastrar</button>
 			</form>
 			<a class="text-primary font-medium pt-2" href="./index.html">Voltar</a>
+			<div id="error-container" class="bg-negative max-w-72 w-full p-2 mt-4 rounded-md flex-col hidden">
+				<h6 id="error-title" class="text-m text-center uppercase"></h6>
+				<p id="error-message" class="text-center"></p>
+			</div>
 		</main>
 		<footer class="flex justify-center py-6">
 			<a>Desenvolvido por Michael Rocha</a>
 		</footer>
+		<script type="module" src="./javascript/login/register.js"></script>
 	</body>
 </html>

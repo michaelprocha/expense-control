@@ -14,13 +14,13 @@ export default function register(req, res) {
         db.query(verifyEmail, email, async (error, result) => {
             if (error) {
                 res.writeHead(500, {"Content-type": "application/json"});
-                res.end(JSON.stringify({message: 'unknown error'}));
+                res.end(JSON.stringify({message: 'Falha inesperada'}));
                 return;
             }
 
             if (result.length > 0) {
-                res.writeHead(200, {"Content-type": "application/json"});
-                res.end(JSON.stringify({message: "Email is already registered."}));
+                res.writeHead(409, {"Content-type": "application/json; charset='utf-8'"});
+                res.end(JSON.stringify({message: "Email já está cadastrado."}));
                 return;
             }
             
@@ -29,12 +29,12 @@ export default function register(req, res) {
             db.query(query, [ email, firstName, lastName, hash ], (error) => {
                 if (error) {
                     res.writeHead(500, {"Content-type": "application/json"});
-                    res.end(JSON.stringify({message: 'unknown error'}));
+                    res.end(JSON.stringify({message: 'Falha inesperada'}));
                     return;
                 }
                 
-                res.writeHead(200, {"Content-type": "application/json"});
-                res.end(JSON.stringify({message: "Email registered."}));
+                res.writeHead(200, {"Content-type": "application/json; charset='utf-8'"});
+                res.end(JSON.stringify({message: "Usuário cadastrado"}));
             });
         });
 	});
