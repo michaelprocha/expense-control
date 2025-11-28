@@ -13,34 +13,30 @@ export default function login(req, res) {
 		db.query(query, data.email, async (e, result) => {
 			if (e) {
 				res.statusCode = 500;
-				res.statusMessage = 'Erro interno do servidor';
 				res.setHeader("Content-type", "application/json; charset=utf-8");
-				res.end({ message: "Erro servidor" });
+				res.end({ message: "Falha inesperada" });
 				return;
 			}
 			if (result[0]) {
 				const ok = await argon2.verify(result[0].access, data.password);
 				if (!ok) {
 					res.statusCode = 401;
-					res.statusMessage = `Erro ao logar`;
 					res.setHeader("Content-type", "application/json; charset=utf-8");
-					res.end(JSON.stringify({ message: "senha incorreta" }));
+					res.end(JSON.stringify({ message: "Email ou senha incorreta" }));
 					return;
 				}
 
 				const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "2m" });
 
 				res.statusCode = 200;
-				res.statusMessage = `login`;
 				res.setHeader("Content-type", "application/json; charset=utf-8");
 				res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; SameSite=None; Path=/`);
 				res.end(JSON.stringify({ redirect: "products.html" }));
 				return;
 			} else {
 				res.statusCode = 401;
-				res.statusMessage = `Erro ao logar`;
 				res.setHeader("Content-type", "application/json; charset=utf-8");
-				res.end(JSON.stringify({ message: "email incorreto" }));
+				res.end(JSON.stringify({ message: "Email ou senha incorreta" }));
 				return;
 			}
 		});
