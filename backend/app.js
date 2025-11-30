@@ -7,7 +7,8 @@ import forgotAccess from "./login/forgotPassword.js";
 // products
 import getProducts from "./products/getProducts.js";
 import removeProduct from "./products/removeProduct.js";
-// import addProduct from "./javascript/addProduct.js";
+import addProduct from "./products/addProduct.js";
+//
 import logout from "./javascript/logout.js";
 import validToken from "./javascript/verify.js";
 import getIncome from "./javascript/getIncome.js";

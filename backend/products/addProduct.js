@@ -1,30 +1,45 @@
 import db from "../database/db.js";
 
-export default function addProduct(decoded, req, res){
-    let body = '';
+export default function addProduct(decoded, req, res) {
+	let body = "";
 
-    req.on('data', chunk => body += chunk.toString());
+	req.on("data", (chunk) => (body += chunk.toString()));
 
-    req.on('end', () => {
-        const data = JSON.parse(body);
-        const { productName, productValue, productDate } = data;
+	req.on("end", async () => {
+		const data = JSON.parse(body);
+		console.log(data);
+		const { productName, productValue, productDate } = data;
 
-        const queryAddProduct = `INSERT INTO product (usuario_user_id, product_name, product_value, product_date) VALUES (?, ?, ?, ?)`;
-        db.query(queryAddProduct, [decoded.id, productName, productValue, productDate], (error, result) => {
-            if (error) {
-                res.writeHead(500, { "Content-type": "application/json" });
+		const queryAddProduct = `INSERT INTO product (usuario_user_id, product_name, product_value, product_date) VALUES (?, ?, ?, ?)`;
+
+		db.execute(queryAddProduct, [decoded.id, productName, productValue, productDate], (error, result) => {
+			if (error) {
+				res.writeHead(500, { "Content-type": "application/json" });
 				res.end(JSON.stringify({ message: "Falha inesperada" }));
 				return;
-            }
-            
-            if (!result[0]) {
-                res.writeHead(500, { "Content-type": "application/json" });
-				res.end(JSON.stringify({ message: "Falha inesperada" }));
-				return;
-            }
-            res.writeHead(200, {"Content-type": "application/json"});
-            res.end(JSON.stringify({message: result[0].id}));
-            return;
-        });
-    });
+			}
+			res.writeHead(200, { "Content-type": "application/json" });
+			res.end(JSON.stringify({ id: result.insertId }));
+			return;
+		});
+
+		// db.query(queryAddProduct, [decoded.id, productName, productValue, productDate], (error, result) => {
+		//     if (error) {
+		//     }
+
+		//     // const queryGetProductId = `SELECT product_id FROM product WHERE usuario_user_id = ?;`;
+		//     // db.query(queryGetProductId, decoded.id, (error, result) => {
+
+		//     // });
+		//     if (!result[0]) {
+		//         console.log(result);
+		//         res.writeHead(500, { "Content-type": "application/json" });
+		// 		res.end(JSON.stringify({ message: "Falha inesperada" }));
+		// 		return;
+		//     }
+		//     res.writeHead(200, {"Content-type": "application/json"});
+		//     res.end(JSON.stringify({id: result[0].id}));
+		//     return;
+		// });
+	});
 }
