@@ -2,9 +2,24 @@ import verifyLogin from "./protect.pages.js";
 
 const productsList = document.querySelector("#products-list");
 
-const result = await verifyLogin();
+async function verifyToken() {
+	try {
+		const result = await verifyLogin();
+		if (result.status === 401 || result.status === 500) {
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			return;
+		}
+		const products = await getProducts();
+		renderProducts(products);
+		return;
+	} catch (error) {
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		return;
+	}
+}
+
 async function getProducts() {
-	const login = await fetch("http://localhost:3000/login/products", {
+	const login = await fetch("http://localhost:3000/getProducts", {
 		method: "GET",
 		credentials: "include",
 	});
@@ -23,34 +38,56 @@ function renderProducts(products) {
 	products.forEach((product) => {
 		const date = product.product_date.substring(0, 10);
 		const dateFormated = `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
-		appendProduct += `<li id="product-id-${product.product_id}" class="p-4 bg-primary rounded-2xl flex flex-col justify-between">
-							<div class="flex flex-col items-center gap-2">
-									<h4 class="text-l">${product.product_name}</h4>
-								<div class="w-full flex justify-between">
-									<p>R$ ${product.product_value}</p>
-									<p>${dateFormated}</p>
-								</div>
-							</div>
-							<div class="flex">
-								<a id="remove">EXCLUIR</a>
-							</div>
-						</li>`;
+		appendProduct += `<li data-id="${product.product_id}" class="p-4 bg-primary rounded-2xl flex flex-col justify-between">
+		<div class="flex flex-col items-center gap-2">
+		<h4 class="text-l">${product.product_name}</h4>
+		<div class="w-full flex justify-between">
+		<p>R$ ${product.product_value}</p>
+		<p>${dateFormated}</p>
+		</div>
+		</div>
+		<div class="flex">
+		<a id="remove" class="uppercase">Excluir</a>
+		</div>
+		</li>`;
 	});
 	productsList.innerHTML = appendProduct;
 }
 
-const products = await getProducts();
-renderProducts(products);
-console.log(products);
+async function deleteProduct(productId, productElement) {
+	try {
+		const response = await fetch("http://localhost:3000/deleteProduct", {
+			method: "DELETE",
+			credentials: "include",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(productId),
+		});
 
-productsList.addEventListener("click", (event) => {
-	console.log(event.target);
+
+		if (response.status === 401 || response.status === 500) {
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			return;
+		} 
+		
+		if(response.status === 204){
+			productElement.remove();
+			return;
+		}
+	} catch (error) {
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		return;
+	}
+}
+
+await verifyToken();
+
+productsList.addEventListener("click", async (event) => {
 	const element = event.target;
 	if (element.id) {
-		if (element.id === "edit") {
-			console.log("editar");
-		} else if (element.id === "remove") {
-			console.log("remover");
+		if (element.id === "remove") {
+			const productElement = element.parentElement.parentElement;
+			const productId = parseInt(element.parentElement.parentElement.dataset.id);
+			await deleteProduct(productId, productElement);
 		}
 	}
 });

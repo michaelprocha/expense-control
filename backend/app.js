@@ -1,16 +1,18 @@
 import http from "http";
 import { URL } from "url";
+// login
 import login from "./login/login.js";
 import register from "./login/register.js";
 import forgotAccess from "./login/forgotPassword.js";
+// products
+import getProducts from "./products/getProducts.js";
+import removeProduct from "./products/removeProduct.js";
+// import addProduct from "./javascript/addProduct.js";
 import logout from "./javascript/logout.js";
-import products from "./javascript/products.js";
 import validToken from "./javascript/verify.js";
 import getIncome from "./javascript/getIncome.js";
 import editIncome from "./javascript/editIncome.js";
-import addProduct from "./javascript/addProduct.js";
 import passwordReset from "./javascript/password.js";
-import removeProduct from "./javascript/removeProduct.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -40,7 +42,7 @@ const server = http.createServer((req, res) => {
 		} else if (urlReq.pathname === "/logout") {
 			logout(res);
 			return;
-		} else if (urlReq.pathname === "/add-product") {
+		} else if (urlReq.pathname === "/addProduct") {
 			const decoded = validToken(req, res);
 			if (decoded.valid === false) {
 				return;
@@ -64,12 +66,16 @@ const server = http.createServer((req, res) => {
 			editIncome(decoded, req, res);
 			return;
 		}
-	} else if (req.method === "DELTE") {
+	} else if (req.method === "DELETE") {
 		const decoded = validToken(req, res);
 		if (decoded.valid === false) {
 			return;
 		}
-		removeProduct(decoded, req, res);
+
+		if (urlReq.pathname === "/deleteProduct") {
+			
+			removeProduct(decoded, req, res);
+		}
 		return;
 	} else {
 		const decoded = validToken(req, res);
@@ -78,10 +84,10 @@ const server = http.createServer((req, res) => {
 		}
 		if (urlReq.pathname === "/login/verify") {
 			res.writeHead(200, { "Content-Type": "application/json" });
-			res.end(JSON.stringify({ valid: true, message: "access allowed" }));
+			res.end(JSON.stringify({ valid: true }));
 			return;
-		} else if (urlReq.pathname === "/login/products") {
-			products(decoded, res);
+		} else if (urlReq.pathname === "/getProducts") {
+			getProducts(decoded, res);
 			return;
 		} else if (urlReq.pathname === "getIncome") {
 			getIncome(decoded, res);

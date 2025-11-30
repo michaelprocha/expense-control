@@ -12,15 +12,15 @@ export default function addProduct(decoded, req, res){
         const queryAddProduct = `INSERT INTO product (usuario_user_id, product_name, product_value, product_date) VALUES (?, ?, ?, ?)`;
         db.query(queryAddProduct, [decoded.id, productName, productValue, productDate], (error, result) => {
             if (error) {
-                res.writeHead(500, {"Content-type": "application/json"});
-                res.end(JSON.stringify({message: "unknown error"}));
-                return;
+                res.writeHead(500, { "Content-type": "application/json" });
+				res.end(JSON.stringify({ message: "Falha inesperada" }));
+				return;
             }
             
             if (!result[0]) {
-                res.writeHead(500, {"Content-type": "application/json"});
-                res.end(JSON.stringify({message: "unknown error"}));
-                return;
+                res.writeHead(500, { "Content-type": "application/json" });
+				res.end(JSON.stringify({ message: "Falha inesperada" }));
+				return;
             }
             res.writeHead(200, {"Content-type": "application/json"});
             res.end(JSON.stringify({message: result[0].id}));
