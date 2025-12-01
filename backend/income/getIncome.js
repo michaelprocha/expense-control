@@ -11,7 +11,7 @@ export default function getIncome(decoded, res){
         }
 
         res.writeHead(200, {"Content-type": "application/json"});
-        res.end(JSON.stringify({ message: result[0]}));
+        res.end(JSON.stringify(result[0]));
         return;
     });
 }

@@ -37,19 +37,19 @@
 				<ul class="py-4 flex flex-col gap-6">
 					<li class="p-4 bg-positive rounded-2xl flex flex-col">
 						<p>Valor guardado</p>
-                        <p>R$ 1000,00</p>
+                        <p id="saved-value-report">R$ 1000,00</p>
 					</li>
 					<li class="p-4 bg-negative rounded-2xl flex flex-col">
 						<p>Valor gasto</p>
-                        <p>R$ 1000,00</p>
+                        <p id="amount-spent">R$ 1000,00</p>
 					</li>
 					<li class="p-4 bg-alert rounded-2xl flex flex-col">
 						<p>Valor restante</p>
-                        <p>R$ 1000,00</p>
+                        <p id="remaining-amount">R$ 1000,00</p>
 					</li>
 					<li class="p-4 bg-primary rounded-2xl flex flex-col">
 						<p>Meta vs Gasto</p>
-                        <p>R$ 1000,00</p>
+                        <p id="goal">R$ 1000,00</p>
 					</li>
 				</ul>
 			</section>
@@ -57,6 +57,6 @@
 		<footer class="flex justify-center py-6">
 			<a>Desenvolvido por Michael Rocha</a>
 		</footer>
-		<script src="./javascript/index.js"></script>
+		<script type="module" src="./javascript/report.js"></script>
 	</body>
 </html>

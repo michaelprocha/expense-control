@@ -8,12 +8,13 @@ import forgotAccess from "./login/forgotPassword.js";
 import getProducts from "./products/getProducts.js";
 import removeProduct from "./products/removeProduct.js";
 import addProduct from "./products/addProduct.js";
-//
+// income
+import editIncome from "./income/editIncome.js";
+import getIncome from "./income/getIncome.js";
+// others
 import logout from "./javascript/logout.js";
 import validToken from "./javascript/verify.js";
-import getIncome from "./javascript/getIncome.js";
-import editIncome from "./javascript/editIncome.js";
-import passwordReset from "./javascript/password.js";
+import passwordReset from "./javascript/passwordReset.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -50,16 +51,12 @@ const server = http.createServer((req, res) => {
 			}
 			addProduct(decoded, req, res);
 			return;
-		}
-	} else if (req.method === "PATCH" || req.method === "PUT") {
-		if (urlReq.pathname === "/login/forgot") {
-			const decoded = validToken(req, res);
-			if (decoded.valid === false) {
-				return;
-			}
+		} else if (urlReq.pathname === "/passwordReset") {
 			passwordReset(req, res);
 			return;
-		} else if (urlReq.pathname === "/editIncome") {
+		}
+	} else if (req.method === "PATCH" || req.method === "PUT") {
+		if (urlReq.pathname === "/editIncome") {
 			const decoded = validToken(req, res);
 			if (decoded.valid === false) {
 				return;
@@ -74,7 +71,6 @@ const server = http.createServer((req, res) => {
 		}
 
 		if (urlReq.pathname === "/deleteProduct") {
-			
 			removeProduct(decoded, req, res);
 		}
 		return;
@@ -90,7 +86,7 @@ const server = http.createServer((req, res) => {
 		} else if (urlReq.pathname === "/getProducts") {
 			getProducts(decoded, res);
 			return;
-		} else if (urlReq.pathname === "getIncome") {
+		} else if (urlReq.pathname === "/getIncome") {
 			getIncome(decoded, res);
 			return;
 		}
