@@ -5,6 +5,8 @@ const formElement = document.querySelector("form");
 const productName = document.querySelector("#product");
 const productValue = document.querySelector("#value");
 const productDate = document.querySelector("#date");
+const menuElement = document.querySelector("#menu");
+const navMenuElement = document.querySelector("#nav-menu");
 
 async function verifyToken() {
 	try {
@@ -42,16 +44,16 @@ function renderProducts(products) {
 	products.forEach((product) => {
 		const date = product.product_date.substring(0, 10);
 		const dateFormated = `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
-		appendProduct += `<li data-id="${product.product_id}" class="p-4 bg-primary rounded-2xl flex flex-col justify-between">
-		<div class="flex flex-col items-center gap-2">
-		<h4 class="text-l">${product.product_name}</h4>
-		<div class="w-full flex justify-between">
-		<p>R$ ${product.product_value}</p>
-		<p>${dateFormated}</p>
+		appendProduct += `<li data-id="${product.product_id}" class="w-full max-w-70 gap-3 p-4 bg-primary rounded-2xl flex flex-col justify-between items-center">
+		<div class="flex flex-col items-center gap-3">
+		<h4 class="text-l capitalize">${product.product_name}</h4>
+		<div class="w-full flex flex-col items-center justify-between gap-2">
+		<p>Valor: R$ ${product.product_value}</p>
+		<p>Data: ${dateFormated}</p>
 		</div>
 		</div>
-		<div class="flex">
-		<a id="remove" class="uppercase">Excluir</a>
+		<div class="flex bg-negative rounded-2xl items-center justify-center h-8 w-26 max-w-26">
+		<a id="remove" class="font-bold uppercase">Excluir</a>
 		</div>
 		</li>`;
 	});
@@ -108,19 +110,25 @@ async function addProduct(product) {
 function renderProductAdd(productId, product) {
 	const productLi = document.createElement("li");
 	productLi.setAttribute("id", productId);
-	const dateFormated = `${product.productDate.substring(8)}/${product.productDate.substring(5, 7)}/${product.productDate.substring(0, 4)}`;
-	productLi.classList.add("p-4", "bg-primary", "rounded-2xl", "flex", "flex-col", "justify-between");
-	productLi.innerHTML = `<div class="flex flex-col items-center gap-2">
-		<h4 class="text-l">${product.productName}</h4>
-		<div class="w-full flex justify-between">
-		<p>R$ ${product.productValue}</p>
-		<p>${dateFormated}</p>
+	const dateFormated = `${product.productDate.substring(8)}/${product.productDate.substring(
+		5,
+		7
+	)}/${product.productDate.substring(0, 4)}`;
+	productLi.classList.add("w-full", "max-w-70", "p-4", "bg-primary", "rounded-2xl", "flex", "flex-col", "justify-between", "gap-3", "items-center");
+	productLi.innerHTML = `<div class="flex flex-col items-center gap-3">
+		<h4 class="text-l capitalize">${product.productName}</h4>
+		<div class="w-full flex flex-col items-center justify-between gap-2">
+		<p>Valor: R$ ${product.productValue}</p>
+		<p>Data: ${dateFormated}</p>
 		</div>
 		</div>
-		<div class="flex">
-		<a id="remove" class="uppercase">Excluir</a>
+		<div class="flex bg-negative rounded-2xl items-center justify-center h-8 w-26 max-w-26">
+		<a id="remove" class="font-bold uppercase">Excluir</a>
 		</div>`;
 	productsList.append(productLi);
+	productName.value = "";
+	productValue.value = "";
+	productDate.value = "";
 }
 
 await verifyToken();
@@ -129,7 +137,7 @@ formElement.addEventListener("submit", async (event) => {
 	event.preventDefault();
 	const product = {
 		productName: productName.value,
-		productValue: parseInt(productValue.value),
+		productValue: parseInt(productValue.value.replace(",", "")),
 		productDate: productDate.value,
 	};
 	await addProduct(product);
@@ -144,4 +152,22 @@ productsList.addEventListener("click", async (event) => {
 			await deleteProduct(productId, productElement);
 		}
 	}
+});
+
+menuElement.addEventListener("click", () => {
+	if (navMenuElement.classList.contains("hidden")) {
+		navMenuElement.classList.add("flex");
+		navMenuElement.classList.remove("hidden");
+		return;
+	}
+	navMenuElement.classList.remove("flex");
+	navMenuElement.classList.add("hidden");
+	return;
+});
+
+productValue.addEventListener("input", function () {
+	let value = this.value.replace(/\D/g, "");
+	value = (value / 100).toFixed(2) + "";
+	value = value.replace(".", ",");
+	this.value = value;
 });

@@ -26,7 +26,7 @@ export default function login(req, res) {
 					return;
 				}
 
-				const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "2m" });
+				const token = jwt.sign({ id: result[0].user_id }, "token", { expiresIn: "1h" });
 
 				res.statusCode = 200;
 				res.setHeader("Content-type", "application/json; charset=utf-8");

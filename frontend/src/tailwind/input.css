@@ -28,19 +28,19 @@
 
 @layer base {
 	body {
-		@apply min-w-dvw min-h-dvh bg-white text-black flex flex-col dark:bg-black dark:text-white;
+		@apply min-h-dvh flex flex-col items-center bg-white text-black dark:bg-black dark:text-white;
 	}
 
-	header {
-		@apply min-w-dvw;
+	header{
+		@apply w-full max-w-400;
 	}
 
-	main {
-		@apply min-w-dvw;
+	main{
+		@apply max-w-400;
 	}
 
-	footer {
-		@apply min-w-dvw mt-auto;
+	footer{
+		@apply mt-auto max-w-400;
 	}
 
 	h1,
@@ -102,4 +102,22 @@
 }
 
 @layer components {
+	.navItem {
+		@apply w-fit relative;
+	}
+
+	.navItem::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 0;
+		height: 2px;
+		background: white;
+		width: 0px;
+	}
+
+	.navItem:hover::after {
+		width: 100%;
+	}
 }

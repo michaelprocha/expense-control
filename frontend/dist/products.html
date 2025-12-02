@@ -15,31 +15,42 @@
 	<body>
 		<header class="flex justify-between items-center py-4 px-8">
 			<h1 class="text-3xl">InfoMoney</h1>
-			<nav>
-				<a href="http://127.0.0.1:5500/frontend/dist/report.html">Renda e metas</a>
-				<a href="">Sair</a>
+			<nav class="hidden md:flex gap-6">
+				<a class="navItem" href="http://127.0.0.1:5500/frontend/dist/report.html">Relatorio</a>
+				<a class="navItem" href="http://127.0.0.1:5500/frontend/dist/index.html">Sair</a>
 			</nav>
+			<div class="relative md:hidden">
+				<div id="menu" class="cursor-pointer">
+					<div class="w-7 h-1 bg-white mb-1"></div>
+					<div class="w-7 h-1 bg-white mb-1"></div>
+					<div class="w-7 h-1 bg-white"></div>
+				</div>
+				<nav id="nav-menu" class="bg-primary py-2 px-2 w-35 hidden flex-col gap-1 absolute right-0 top-10">
+					<a class="navItem" href="http://127.0.0.1:5500/frontend/dist/report.html">Renda e metas</a>
+					<a class="navItem" href="">Sair</a>
+				</nav>
+			</div>
 		</header>
-		<main class="flex flex-col flex-1">
+		<main class="w-full flex flex-col flex-1">
 			<form class="flex flex-col gap-3 w-full px-8 py-16">
 				<h3 class="text-xl">Adicionar compra</h3>
 				<div class="flex flex-col">
 					<label for="product">Nome do produto</label>
-					<input class="p-1.5 max-w-md" name="productName" id="product" type="text" />
+					<input autocomplete="off" class="p-1.5 max-w-md" name="productName" id="product" type="text" />
 				</div>
 				<div class="flex flex-col">
 					<label for="value">Valor do produto</label>
-					<input class="p-1.5 max-w-md" name="productValue" id="value" type="number" />
+					<input autocomplete="off" class="p-1.5 max-w-md" name="productValue" id="value" type="text" />
 				</div>
 				<div class="flex flex-col">
 					<label for="date">Data da compra</label>
-					<input class="p-1.5 max-w-md" name="productDate" id="date" type="date" />
+					<input autocomplete="off" class="p-1.5 max-w-md" name="productDate" id="date" type="date" />
 				</div>
 				<button class="py-2 mt-2.5 max-w-md">Adicionar</button>
 			</form>
 			<section class="flex flex-col px-8 pb-22">
 				<h3 class="text-xl">Produtos comprados</h3>
-				<ul id="products-list" class="py-4 flex flex-col gap-6">
+				<ul id="products-list" class="py-4 flex flex-wrap gap-6">
 				</ul>
 			</section>
 		</main>
