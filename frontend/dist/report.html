@@ -15,41 +15,52 @@
 	<body>
 		<header class="flex justify-between items-center py-4 px-8">
 			<h1 class="text-3xl">InfoMoney</h1>
-			<nav>
-				<a href="">Perfil</a>
-				<a href="">Sair</a>
+			<nav class="hidden md:flex gap-6">
+				<a class="navItem" href="http://127.0.0.1:5500/frontend/dist/products.html">Produtos</a>
+				<a data-function="exit" class="navItem" href="#">Sair</a>
 			</nav>
+			<div class="relative md:hidden">
+				<div id="menu" class="cursor-pointer">
+					<div class="w-7 h-1 bg-white mb-1"></div>
+					<div class="w-7 h-1 bg-white mb-1"></div>
+					<div class="w-7 h-1 bg-white"></div>
+				</div>
+				<nav id="nav-menu" class="bg-primary py-2 px-2 w-35 hidden flex-col gap-1 absolute right-0 top-10">
+					<a class="navItem" href="http://127.0.0.1:5500/frontend/dist/products.html">Produtos</a>
+					<a data-function="exit" class="navItem" href="#">Sair</a>
+				</nav>
+			</div>
 		</header>
 		<main class="flex flex-col items-center pt-22 pb-16">
 			<form class="pb-16 px-5 w-full flex flex-col gap-3 max-w-2xs">
 				<div class="flex flex-col">
 					<label for="saved-value">Valor Guardado (R$)</label>
-					<input class="p-1.5 max-w-md" name="savedValue" id="saved-value" type="number" />
+					<input class="p-1.5 max-w-md" name="savedValue" id="saved-value" type="text" />
 				</div>
 				<div class="flex flex-col">
 					<label for="spending-target">Meta de Gasto (R$)</label>
-					<input class="p-1.5 max-w-md" name="spendingTarget" id="spending-target" type="number" />
+					<input class="p-1.5 max-w-md" name="spendingTarget" id="spending-target" type="text" />
 				</div>
 				<button class="py-2 mt-2.5" type="submit">Salvar dados</button>
 			</form>
 			<section class="flex flex-col w-full px-8 pb-22">
-				<h3 class="text-xl">Relatorio de gastos</h3>
-				<ul class="py-4 flex flex-col gap-6">
-					<li class="p-4 bg-positive rounded-2xl flex flex-col">
+				<h3 class="text-xl text-center">Relatorio de gastos</h3>
+				<ul class="py-4 flex gap-6 flex-wrap justify-center">
+					<li class="w-60 h-25 p-4 bg-positive rounded-2xl flex flex-col justify-center">
 						<p>Valor guardado</p>
-                        <p id="saved-value-report">R$ 1000,00</p>
+						<p id="saved-value-report">R$ 1000,00</p>
 					</li>
-					<li class="p-4 bg-negative rounded-2xl flex flex-col">
+					<li class="w-60 h-25 p-4 bg-negative rounded-2xl flex flex-col justify-center">
 						<p>Valor gasto</p>
-                        <p id="amount-spent">R$ 1000,00</p>
+						<p id="amount-spent">R$ 1000,00</p>
 					</li>
-					<li class="p-4 bg-alert rounded-2xl flex flex-col">
+					<li class="w-60 h-25 p-4 bg-alert rounded-2xl flex flex-col justify-center">
 						<p>Valor restante</p>
-                        <p id="remaining-amount">R$ 1000,00</p>
+						<p id="remaining-amount">R$ 1000,00</p>
 					</li>
-					<li class="p-4 bg-primary rounded-2xl flex flex-col">
+					<li class="w-60 h-25 p-4 bg-primary rounded-2xl flex flex-col justify-center">
 						<p>Meta vs Gasto</p>
-                        <p id="goal">R$ 1000,00</p>
+						<p id="goal">R$ 1000,00</p>
 					</li>
 				</ul>
 			</section>

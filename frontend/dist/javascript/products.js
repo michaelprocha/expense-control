@@ -7,6 +7,7 @@ const productValue = document.querySelector("#value");
 const productDate = document.querySelector("#date");
 const menuElement = document.querySelector("#menu");
 const navMenuElement = document.querySelector("#nav-menu");
+const exitElement = Array.from(document.querySelectorAll('[data-function="exit"]'));
 
 async function verifyToken() {
 	try {
@@ -41,14 +42,20 @@ async function getProducts() {
 
 function renderProducts(products) {
 	let appendProduct = "";
+
 	products.forEach((product) => {
 		const date = product.product_date.substring(0, 10);
 		const dateFormated = `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
+		const cut = product.product_value.length - 2;
+		const start = product.product_value.substring(0, cut);
+		const end = product.product_value.substring(cut);
+		const formatedValue = `R$ ${start},${end}`;
+
 		appendProduct += `<li data-id="${product.product_id}" class="w-full max-w-70 gap-3 p-4 bg-primary rounded-2xl flex flex-col justify-between items-center">
 		<div class="flex flex-col items-center gap-3">
 		<h4 class="text-l capitalize">${product.product_name}</h4>
 		<div class="w-full flex flex-col items-center justify-between gap-2">
-		<p>Valor: R$ ${product.product_value}</p>
+		<p>Valor: ${formatedValue}</p>
 		<p>Data: ${dateFormated}</p>
 		</div>
 		</div>
@@ -114,11 +121,29 @@ function renderProductAdd(productId, product) {
 		5,
 		7
 	)}/${product.productDate.substring(0, 4)}`;
-	productLi.classList.add("w-full", "max-w-70", "p-4", "bg-primary", "rounded-2xl", "flex", "flex-col", "justify-between", "gap-3", "items-center");
+
+	const stringValue = `${product.productValue}`;
+	const cut = stringValue.length - 2;
+	const start = stringValue.substring(0, cut);
+	const end = stringValue.substring(cut);
+	const formatedValue = `R$ ${start},${end}`;
+
+	productLi.classList.add(
+		"w-full",
+		"max-w-70",
+		"p-4",
+		"bg-primary",
+		"rounded-2xl",
+		"flex",
+		"flex-col",
+		"justify-between",
+		"gap-3",
+		"items-center"
+	);
 	productLi.innerHTML = `<div class="flex flex-col items-center gap-3">
 		<h4 class="text-l capitalize">${product.productName}</h4>
 		<div class="w-full flex flex-col items-center justify-between gap-2">
-		<p>Valor: R$ ${product.productValue}</p>
+		<p>Valor: ${formatedValue}</p>
 		<p>Data: ${dateFormated}</p>
 		</div>
 		</div>
@@ -131,7 +156,29 @@ function renderProductAdd(productId, product) {
 	productDate.value = "";
 }
 
+async function logout() {
+	try {
+		const response = await fetch("http://localhost:3000/logout", {
+			credentials: "include",
+			method: "POST",
+		});
+
+		const data = await response.json();
+
+		if (data.redirect) {
+			window.location.href = data.redirect;
+		}
+	} catch (error) {}
+}
+
 await verifyToken();
+
+exitElement.forEach((element) => {
+	element.addEventListener("click", async (event) => {
+		event.preventDefault();
+		await logout();
+	});
+});
 
 formElement.addEventListener("submit", async (event) => {
 	event.preventDefault();

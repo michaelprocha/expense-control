@@ -5,6 +5,7 @@ const goalElement = document.querySelector("#goal");
 const formElement = document.querySelector("form");
 const inputSavedEelement = document.querySelector("#saved-value");
 const inputTrgetEelement = document.querySelector("#spending-target");
+const exitElement = Array.from(document.querySelectorAll('[data-function="exit"]'));
 
 async function getIncome() {
 	try {
@@ -28,10 +29,19 @@ async function getIncome() {
 }
 
 function renderIncome(income) {
-	savedValueElement.textContent = income.total_saved;
-	amountSpentElement.textContent = income.total_value_products;
-	remainingAmountElement.textContent = income.remaining_amount;
-	goalElement.textContent = income.spending_target;
+	let values = [];
+	for (const value in income) {
+		const cut = income[value].length - 2;
+		const start = income[value].substring(0, cut);
+		const end = income[value].substring(cut);
+		const finalValue = `R$ ${start},${end}`;
+		values.push(finalValue);
+	}
+	
+	savedValueElement.textContent = values[1];
+	amountSpentElement.textContent = values[2];
+	remainingAmountElement.textContent = values[3];
+	goalElement.textContent = values[0];
 }
 
 async function editIncome(newIncome) {
@@ -48,15 +58,37 @@ async function editIncome(newIncome) {
 			return;
 		}
 
-        await getIncome();
-        return;
+		await getIncome();
+		return;
 	} catch (error) {
 		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
 		return;
 	}
 }
 
+async function logout() {
+	try {
+		const response = await fetch("http://localhost:3000/logout", {
+			credentials: "include",
+			method: "POST",
+		});
+
+		const data = await response.json();
+
+		if (data.redirect) {
+			window.location.href = data.redirect;
+		}
+	} catch (error) {}
+}
+
 await getIncome();
+
+exitElement.forEach((element) => {
+	element.addEventListener("click", async (event) => {
+		event.preventDefault();
+		await logout();
+	});
+});
 
 formElement.addEventListener("submit", async (event) => {
 	event.preventDefault();
@@ -65,4 +97,18 @@ formElement.addEventListener("submit", async (event) => {
 		targetValue: parseInt(inputTrgetEelement.value),
 	};
 	await editIncome(newIncome);
+});
+
+inputSavedEelement.addEventListener("input", function () {
+	let value = this.value.replace(/\D/g, "");
+	value = (value / 100).toFixed(2) + "";
+	value = value.replace(".", ",");
+	this.value = value;
+});
+
+inputTrgetEelement.addEventListener("input", function () {
+	let value = this.value.replace(/\D/g, "");
+	value = (value / 100).toFixed(2) + "";
+	value = value.replace(".", ",");
+	this.value = value;
 });
