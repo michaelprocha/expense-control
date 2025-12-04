@@ -5,7 +5,7 @@ export default async function verifyLogin() {
 	});
 
 	if (login.status === 401) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return decoded;
 	}
 

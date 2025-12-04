@@ -13,14 +13,14 @@ async function verifyToken() {
 	try {
 		const result = await verifyLogin();
 		if (result.status === 401 || result.status === 500) {
-			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 			return;
 		}
 		const products = await getProducts();
 		renderProducts(products);
 		return;
 	} catch (error) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return;
 	}
 }
@@ -32,7 +32,7 @@ async function getProducts() {
 	});
 
 	if (login.status === 401) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return decoded;
 	}
 
@@ -77,7 +77,7 @@ async function deleteProduct(productId, productElement) {
 		});
 
 		if (response.status === 401 || response.status === 500) {
-			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 			return;
 		}
 
@@ -86,7 +86,7 @@ async function deleteProduct(productId, productElement) {
 			return;
 		}
 	} catch (error) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return;
 	}
 }
@@ -101,7 +101,7 @@ async function addProduct(product) {
 		});
 
 		if (response.status === 401 || response.status === 500) {
-			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 			return;
 		}
 
@@ -109,7 +109,7 @@ async function addProduct(product) {
 
 		renderProductAdd(data.id, product);
 	} catch (error) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return;
 	}
 }

@@ -4,6 +4,6 @@ export default function logout(res) {
 		"Content-Type": "application/json",
 	});
 
-    res.end(JSON.stringify({ message: "Logout efetuado" }));
+    res.end(JSON.stringify({ redirect: "login.html" }));
     return;
 }

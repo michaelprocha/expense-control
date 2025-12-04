@@ -6,6 +6,8 @@ const formElement = document.querySelector("form");
 const inputSavedEelement = document.querySelector("#saved-value");
 const inputTrgetEelement = document.querySelector("#spending-target");
 const exitElement = Array.from(document.querySelectorAll('[data-function="exit"]'));
+const menuElement = document.querySelector("#menu");
+const navMenuElement = document.querySelector("#nav-menu");
 
 async function getIncome() {
 	try {
@@ -15,7 +17,7 @@ async function getIncome() {
 		});
 
 		if (response.status === 401 || response.status === 500) {
-			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 			return;
 		}
 
@@ -23,7 +25,7 @@ async function getIncome() {
 		renderIncome(data);
 		return;
 	} catch (error) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return;
 	}
 }
@@ -54,14 +56,16 @@ async function editIncome(newIncome) {
 		});
 
 		if (response.status === 500 || response.status === 401) {
-			window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+			window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 			return;
 		}
 
 		await getIncome();
+		inputSavedEelement.value = "";
+		inputTrgetEelement.value = "";
 		return;
 	} catch (error) {
-		window.location.href = "http://127.0.0.1:5500/frontend/dist/index.html";
+		window.location.href = "http://127.0.0.1:5500/frontend/dist/login.html";
 		return;
 	}
 }
@@ -111,4 +115,15 @@ inputTrgetEelement.addEventListener("input", function () {
 	value = (value / 100).toFixed(2) + "";
 	value = value.replace(".", ",");
 	this.value = value;
+});
+
+menuElement.addEventListener("click", () => {
+	if (navMenuElement.classList.contains("hidden")) {
+		navMenuElement.classList.add("flex");
+		navMenuElement.classList.remove("hidden");
+		return;
+	}
+	navMenuElement.classList.remove("flex");
+	navMenuElement.classList.add("hidden");
+	return;
 });
