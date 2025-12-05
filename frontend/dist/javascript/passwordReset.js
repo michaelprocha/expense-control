@@ -9,10 +9,28 @@ const errorContainer = document.querySelector("#error-container");
 const errorTitle = document.querySelector("#error-title");
 const errorMessage = document.querySelector("#error-message");
 
-form.addEventListener("submit", async (event) => {
-	event.preventDefault();
-	const passwordValue = password.value;
-	const passwordConfirmValue = passwordConfirm.value;
+function errorValidate() {
+	if (errorContainer.classList.contains("bg-positive")) {
+		errorContainer.classList.add("bg-negative");
+		errorContainer.classList.remove("bg-positive");
+	}
+
+	errorContainer.classList.remove("hidden");
+	errorContainer.classList.add("flex");
+	errorTitle.textContent = "Senha";
+	errorMessage.textContent = "As senhas digitadas não são iguais.";
+	return;
+}
+
+function validatePassword(PasswordOne, PasswordTwo) {
+	if (PasswordOne === PasswordTwo) {
+		return PasswordOne;
+	} else {
+		return false;
+	}
+}
+
+async function sendNewPassword(password) {
 	try {
 		if (!errorContainer.classList.contains("hidden")) {
 			errorContainer.classList.add("hidden");
@@ -21,7 +39,7 @@ form.addEventListener("submit", async (event) => {
 			method: "POST",
 			credentials: "include",
 			headers: { "Content-type": "application/json" },
-			body: JSON.stringify({ password: passwordValue, token: token }),
+			body: JSON.stringify({ password: password, token: token }),
 		});
 
 		if (response.status === 401) {
@@ -42,7 +60,7 @@ form.addEventListener("submit", async (event) => {
 				errorContainer.classList.add("bg-negative");
 				errorContainer.classList.remove("bg-positive");
 			}
-            
+
 			errorContainer.classList.remove("hidden");
 			errorContainer.classList.add("flex");
 			errorTitle.textContent = "Falha inesperada";
@@ -71,4 +89,16 @@ form.addEventListener("submit", async (event) => {
 		errorTitle.textContent = "Falha inesperada";
 		errorMessage.textContent = "Tente novamente mais tarde.";
 	}
+}
+
+form.addEventListener("submit", async (event) => {
+	event.preventDefault();
+	const passwordValue = password.value;
+	const passwordConfirmValue = passwordConfirm.value;
+	const newPassword = validatePassword(passwordValue, passwordConfirmValue);
+	if (newPassword) {
+		await sendNewPassword(newPassword);
+		return;
+	}
+	errorValidate();
 });

@@ -23,7 +23,11 @@
 	--color-positive: #36c281;
 	--color-negative: #d00000;
 	--color-black: #131313;
+	--color-black-weak: #818181;
 	--color-white: #ebebeb;
+	--color-white-weak: rgba(200, 200, 200, 0.6);
+
+	--breakpoint-sm: 30rem;
 }
 
 @layer base {
@@ -31,15 +35,15 @@
 		@apply min-h-dvh flex flex-col items-center bg-white text-black dark:bg-black dark:text-white;
 	}
 
-	header{
+	header {
 		@apply w-full max-w-400;
 	}
 
-	main{
+	main {
 		@apply max-w-400;
 	}
 
-	footer{
+	footer {
 		@apply mt-auto max-w-400;
 	}
 
@@ -99,6 +103,10 @@
 	input:focus {
 		@apply border-primary;
 	}
+
+	input::placeholder {
+		@apply text-black-weak dark:text-white-weak;
+	}
 }
 
 @layer components {
@@ -115,6 +123,15 @@
 		height: 2px;
 		background: white;
 		width: 0px;
+	}
+
+	@media (prefers-color-scheme: light) {
+		.navItem::after {
+			background: black;
+		}
+	}
+
+	.navItem::after {
 	}
 
 	.navItem:hover::after {

@@ -13,8 +13,8 @@
 		<link rel="stylesheet" href="./css/index.css" />
 	</head>
 	<body>
-		<header>
-			<div class="flex justify-between px-4 py-8 items-center">
+		<header class="flex justify-center">
+			<div class="w-full max-w-300 flex justify-between px-4 py-8 items-center">
 				<h1 class="text-3xl">InfoMoney</h1>
 				<nav class="hidden md:flex gap-8">
 					<a class="w-34 font-medium text-center uppercase px-4 py-2 bg-primary rounded-3xl" href="./register.html">Cadastrar</a>
@@ -33,18 +33,18 @@
 				</div>
 			</div>
 		</header>
-		<main>
-			<section class="flex flex-col items-center justify-center gap-4 py-8">
+		<main class="w-full">
+			<section class="bg-primary flex flex-col items-center justify-center gap-4 py-12 md:py-24 mt-6">
 				<h2 class="text-center">Controle de gastos</h2>
-				<p class="text-center max-w-111 mb-4">Organize suas finanças, acompanhe seus gastos e alcance suas metas financeiras com facilidade</p>
-				<a class="px-5 py-4 text-center bg-secondary rounded-4xl uppercase" href="./login.html">Começar Agora</a>
+				<p class="sm:text-l md:text-xl text-center max-w-111 mb-4">Organize suas finanças, acompanhe seus gastos e alcance suas metas financeiras com facilidade</p>
+				<a class="font-bold px-5 py-4 text-center bg-secondary rounded-4xl uppercase" href="./register.html">Começar Agora</a>
 			</section>
-			<section class="flex flex-col items-center justify-center gap-4 py-8">
+			<section class="flex flex-col items-center justify-center gap-4 py-8 mt-10 mb-16">
 				<h3 class="text-center text-2xl md:text-3xl max-w-150">Tudo que você precisa para gerenciar seu dinheiro</h3>
-				<div class="w-full flex flex-col items-center justify-center px-2">
+				<div class="w-full flex flex-col items-center justify-center px-2 gap-10 lg:flex-row">
 					<div class="w-full bg-primary p-2 rounded-2xl md:p-4 max-w-125">
 						<div class="flex flex-col gap-4">
-							<div class="bg-black rounded-2xl p-2">
+							<div class="bg-white dark:bg-black rounded-2xl p-2">
 								<div class="mb-3">
 									<h5 class="text-l mb-0.5">Meta de Gasto</h5>
 									<p>R$ 2.000,00</p>
@@ -55,25 +55,25 @@
 								<p class="mt-1">65% utilizado</p>
 							</div>
 							<div class="w-full flex gap-2 items-center justify-center">
-								<div class="w-1/2 bg-black rounded-2xl p-2">
+								<div class="w-1/2 bg-white dark:bg-black rounded-2xl p-2">
 									<h5 class="text-l">Total Gasto</h5>
 									<p>R$ 1.300,00</p>
 								</div>
-								<div class="w-1/2 bg-black rounded-2xl p-2">
+								<div class="w-1/2 bg-white dark:bg-black rounded-2xl p-2">
 									<h5 class="text-l">Guardado</h5>
 									<p>R$ 500,00</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="flex flex-col items-center justify-center">
-						<h4 class="text-center text-xl md:text-2xl">Acompanhe em Tempo Real</h4>
-						<p>
+					<div class="flex flex-col gap-4 justify-center">
+						<h4 class="text-xl md:text-2xl">Acompanhe em Tempo Real</h4>
+						<p class="max-w-133">
 							Visualize seus gastos instantaneamente. Saiba exatamente quanto você gastou, quanto ainda pode gastar e quanto já
 							guardou para seus objetivos.
 						</p>
-						<ul>
-							<li>
+						<ul class="pl-4 flex flex-col gap-2 list-disc">
+							<li class="">
 								<p>Prático e fácil de usar.</p>
 							</li>
 							<li>
@@ -86,15 +86,15 @@
 					</div>
 				</div>
 			</section>
-			<section>
-				<div>
-					<div>
-						<h4>Registre Cada Compra</h4>
-						<p>
+			<section class="flex flex-col items-center mb-20">
+				<div class="w-full flex flex-col-reverse px-2 items-center justify-center gap-8 lg:flex-row">
+					<div class=" max-w-172 flex flex-col gap-2">
+						<h4 class="text-xl md:text-2xl">Registre Cada Compra</h4>
+						<p class="mb-2">
 							Adicione facilmente cada produto comprado com nome, valor e data. Mantenha um histórico completo de todos os seus
 							gastos organizados em um só lugar.
 						</p>
-						<ul>
+						<ul class="pl-4 flex flex-col gap-2 list-disc">
 							<li>
 								<p>Cadastro rápido e simples de produtos</p>
 							</li>
@@ -106,27 +106,29 @@
 							</li>
 						</ul>
 					</div>
-					<div>
-						<div>
-							<h5>Adicionar Produto</h5>
-							<input autocomplete="off" class="p-1.5 max-w-md" name="productName" id="product" type="text" />
-							<input autocomplete="off" class="p-1.5 max-w-md" name="productValue" id="value" type="text" />
+					<div class="w-full bg-primary p-2 rounded-2xl md:p-4 max-w-125">
+						<div class="bg-white dark:bg-black flex flex-col gap-4 p-2">
+							<h5 class="text-l md:text-xl font-bold mb-2">Adicionar Produto</h5>
+							<input placeholder="Supermercado" autocomplete="off" class="p-1.5 max-w-md" name="productName" id="product" type="text" />
+							<input placeholder="R$ 600,00" autocomplete="off" class="p-1.5 max-w-md" name="productValue" id="value" type="text" />
 							<input autocomplete="off" class="p-1.5 max-w-md" name="productDate" id="date" type="date" />
-							<a href="./login.html">Adicionar</a>
+							<a class="font-bold text-center py-2 px-4 bg-secondary rounded-lg" href="./register.html">Adicionar</a>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section>
-				<h2>Pronto para organizar suas finanças?</h2>
-				<p>Comece agora e tenha controle total sobre seus gastos</p>
-				<a href="./login.html">Começar gratuitamente</a>
+			<section class="bg-primary px-2 py-12 md:py-24 flex flex-col gap-6 sm:gap-10 md:gap-16 text-center items-center">
+				<h2 class="text-xl sm:text-3xl md:text-5xl">Pronto para organizar suas finanças?</h2>
+				<p class="sm:text-xl md:text-2xl">Comece agora e tenha controle total sobre seus gastos</p>
+				<a class="px-8 py-4 bg-secondary rounded-4xl font-bold text-l max-w-80" href="./register.html">Começar gratuitamente</a>
 			</section>
 		</main>
-		<footer class="flex justify-center py-6">
-			<h5>InfoMoney</h5>
-			<p>Organize suas finanças de forma inteligente</p>
-			<p>© 2025 InfoMoney. Todos os direitos reservados.</p>
+		<footer class="max-w-300 px-4 w-full flex flex-col justify-center items-center gap-4 pb-6 mt-6 text-center md:flex-row md:justify-between">
+			<h5 class="text-2xl">InfoMoney</h5>
+			<div class="flex flex-col gap-4">
+				<p>Organize suas finanças de forma inteligente</p>
+				<p class="text-sm">© 2025 InfoMoney. Todos os direitos reservados.</p>
+			</div>
 		</footer>
 		<script src="./javascript/index.js"></script>
 	</body>
